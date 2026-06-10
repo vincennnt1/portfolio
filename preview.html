@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Newsreader:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:      #1a1815;
+      --surface: #222018;
+      --border:  #302c26;
+      --text:    #e8e3db;
+      --muted:   #7a746e;
+      --accent:  #c0623e;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Newsreader', Georgia, serif;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-name {
+      font-family: 'Newsreader', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--text);
+      padding-bottom: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      transition: color 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .tagline {
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 1.25rem;
+    }
+
+    .tagline em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .bio {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      line-height: 1.75;
+    }
+
+    h2 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .recently {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 3rem;
+    }
+
+    .recently li {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.975rem;
+      color: var(--text);
+    }
+
+    .recently li::before {
+      content: '–';
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .recently a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .recently a:hover { border-bottom-color: var(--accent); }
+
+    .cta {
+      font-size: 0.975rem;
+      color: var(--muted);
+    }
+
+    .cta a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .cta a:hover { border-bottom-color: var(--accent); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6rem;
+    }
+
+    .footer-copy {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* swatch reference strip */
+    .swatches {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .swatch {
+      flex: 1;
+      height: 48px;
+      border-radius: 4px;
+      display: flex;
+      align-items: flex-end;
+      padding: 4px 6px;
+    }
+
+    .swatch span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      color: rgba(255,255,255,0.5);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#">Vincent Genov</a>
+  <ul class="nav-links">
+    <li><a href="#">Projects</a></li>
+    <li><a href="#">Blog</a></li>
+    <li><a href="#">Resume</a></li>
+  </ul>
+</nav>
+
+<main>
+  <h1>Hi, I'm Vincent.</h1>
+
+  <p class="tagline">
+    I like using data to tell stories —
+    <em>lately, 85 years of the global arms trade.</em>
+  </p>
+
+  <p class="bio">
+    Data Science student at the University of Waterloo. I work mostly in
+    Python and enjoy graphs, anomalies, and turning messy datasets into
+    something you can actually read.
+  </p>
+
+  <h2>Recently</h2>
+  <ul class="recently">
+    <li>Built the <a href="#">Global Arms Trade Network</a> — an interactive map of 85 years of SIPRI data</li>
+    <li>Import Coordinator @ <a href="#">Mainfreight</a>, handling 100+ inbound shipments</li>
+  </ul>
+
+  <p class="cta">
+    Take a look at <a href="#">what I've built</a>, or read the
+    <a href="#">blog</a> where I document findings from the arms tracker.
+  </p>
+
+  <div class="swatches">
+    <div class="swatch" style="background:#1a1815"><span>#1a1815</span></div>
+    <div class="swatch" style="background:#222018"><span>#222018</span></div>
+    <div class="swatch" style="background:#302c26"><span>#302c26</span></div>
+    <div class="swatch" style="background:#7a746e"><span>#7a746e</span></div>
+    <div class="swatch" style="background:#e8e3db"><span>#e8e3db</span></div>
+    <div class="swatch" style="background:#c0623e"><span>#c0623e</span></div>
+  </div>
+</main>
+
+<footer>
+  <span class="footer-copy">© 2026 Vincent Genov</span>
+  <ul class="footer-links">
+    <li><a href="#">GitHub</a></li>
+    <li><a href="#">LinkedIn</a></li>
+    <li><a href="#">Email</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

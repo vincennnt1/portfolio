@@ -1,0 +1,170 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Global Arms Trade Network — Vincent Genov"
+  description="85 years of SIPRI arms-transfer data visualized as an interactive world map — 258 countries, 3,150 flows, 497 anomaly spikes."
+>
+  <div class="page">
+
+    <div class="back"><a href="/projects">← Projects</a></div>
+
+    <div class="header">
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">NetworkX</span>
+        <span class="tag">React + D3</span>
+        <span class="tag">Gemini API</span>
+        <span class="tag">SIPRI Data</span>
+      </div>
+      <h1>Global Arms Trade Network</h1>
+      <p class="subtitle">85 years of who arms whom, and what changes when history shifts.</p>
+    </div>
+
+    <img src="/arms-map.gif" alt="Interactive world map of arms transfers" class="hero-img" />
+
+    <div class="prose">
+
+      <h2>The problem</h2>
+      <p>
+        The SIPRI arms transfer database covers every major conventional arms deal from 1940 to
+        the present — supplier, recipient, quantity, year. It's a complete record of how military
+        power has moved around the world for 85 years. But in its raw form it's 150,000 rows of
+        transactions. The story is invisible.
+      </p>
+      <p>
+        I wanted to make the structure visible: which countries form tight trading blocs, when
+        those blocs fracture, and where the outlier moments are — the years where a country's
+        arms supply suddenly concentrates or diversifies in a way that breaks the pattern.
+      </p>
+
+      <h2>What I built</h2>
+      <p>
+        A Python ETL pipeline (pandas + Jupyter) cleans and aggregates the raw SIPRI data into
+        a directed graph: 258 nodes (countries), 3,150 edges (supplier→recipient relationships),
+        edge weights proportional to transfer volume. Louvain community detection finds the
+        trading blocs, such as Cold War clusters and post-Soviet realignment.
+      </p>
+      <p>
+        On top of the graph, a Herfindahl-Hirschman Index (HHI) tracks each country's supplier
+        concentration over time. Separately, I computed annual arms import volumes and used a 
+        Z-score threshold to identify unusually large spikes or drops relative to a country's 
+        historical baseline. This process surfaced 497 anomalies across the dataset. Each anomaly 
+        triggered an asynchronous Gemini API call to generate geopolitical context for the 
+        country and year. I also cross-referenced the results with UCDP conflict data to evaluate 
+        how often major shifts in arms imports coincided with real-world conflicts.
+      </p>
+      <p>
+        The front end is a React + D3 interactive world map: click a country to see its
+        trade history, HHI trajectory, and flagged anomalies with Gemini context.
+      </p>
+
+      <img src="/arms-spike.png" alt="HHI anomaly spike chart" class="inline-img" />
+
+      <h2>The hard part</h2>
+      <p>
+        The original hypothesis was that arms import anomalies would correlate with nearby
+        conflicts — that countries ramp up imports when they're at war, or when neighbors are.
+        The method was clean: flag HHI anomalies, cross-reference with UCDP conflict events
+        within a geographic and temporal window, measure the overlap.
+      </p>
+      <p>
+        The result: <strong>~28% of anomaly spikes had a nearby conflict</strong> — against a
+        baseline of ~27%. Essentially no correlation. The null result forced a better question:
+        if active conflict doesn't drive arms concentration, what does?
+      </p>
+      <p>
+        Looking at individual cases revealed a different pattern. Cuba's imports surged ahead 
+        of the Bay of Pigs invasion, and several Eastern European countries showed similar buildups 
+        before periods of instability rather than during them. While the project wasn't designed 
+        to test predictive power directly, these examples suggest that arms transfers may reflect 
+        strategic positioning and alliance shifts before conflicts become visible in traditional 
+        conflict datasets.
+      </p>
+
+      <h2>What I'll be working on next</h2>
+      <p>
+        The current project analyzes how arms-trade networks evolved. The next step is 
+        understanding how resilient those networks are.
+      </p>
+      <p>
+        Using an agent-based model built with Mesa, I want to simulate countries as agents making 
+        supplier-selection decisions based on factors like cost, alliance strength, geographic 
+        proximity, and existing trade relationships. By introducing shocks — sanctions, wars, 
+        regime changes, or supplier collapses — I can observe how quickly the network adapts and 
+        which countries or blocs are most critical to overall stability.
+      </p>
+    </div>
+
+    <div class="project-links">
+      <a href="https://github.com/vincennnt1/WatchTower" target="_blank" rel="noopener">GitHub →</a>
+      <!-- <a href="#">Live demo →</a> -->
+    </div>
+
+  </div>
+</Base>
+
+<style>
+  .back {
+    margin-bottom: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .back a {
+    color: var(--muted);
+    border-bottom: none;
+    transition: color 0.15s;
+  }
+
+  .back a:hover {
+    color: var(--text);
+  }
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .header .tags {
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 0.5rem;
+  }
+
+  .hero-img, .inline-img {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .project-links {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .project-links a {
+    color: var(--accent);
+    border-bottom: none;
+    transition: color 0.15s;
+  }
+
+  .project-links a:hover {
+    color: var(--text);
+  }
+</style>

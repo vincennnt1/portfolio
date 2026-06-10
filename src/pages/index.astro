@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Vincent Genov">
+  <div class="page">
+
+    <h1>Hi, I'm Vincent.</h1>
+
+    <p class="tagline">
+      I like using data to tell stories —
+      <em>lately, 85 years of the global arms trade.</em>
+    </p>
+
+    <p class="bio">
+      Data Science student at the University of Waterloo. I work mostly in
+      Python and enjoy graphs, anomalies, and turning messy datasets into
+      something you can actually read.
+    </p>
+
+    <div class="section">
+      <h2>Recently</h2>
+      <ul class="recently">
+        <li>Built the <a href="/projects/arms-trade">Global Arms Trade Network</a>— an interactive map of 85 years of SIPRI data</li>
+        <li>Import Coordinator @ <a href="https://www.mainfreight.com" target="_blank" rel="noopener">Mainfreight</a>— handling 100+ inbound shipments weekly</li>
+      </ul>
+    </div>
+
+    <p class="cta">
+      Take a look at <a href="/projects">what I've built</a>, or read the
+      <a href="/blog">blog</a> where I document findings from the arms tracker.
+    </p>
+
+  </div>
+</Base>
+
+<style>
+  h1 {
+    margin-bottom: 1.5rem;
+  }
+
+  .tagline {
+    font-size: 1.15rem;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
+
+  .tagline em {
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .bio {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 3rem;
+    line-height: 1.75;
+  }
+
+  h2 {
+    margin-bottom: 1.25rem;
+  }
+
+  .recently {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+  }
+
+  .recently li {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.975rem;
+    color: var(--text);
+  }
+
+  .recently li::before {
+    content: '–';
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .cta {
+    font-size: 0.975rem;
+    color: var(--muted);
+  }
+</style>

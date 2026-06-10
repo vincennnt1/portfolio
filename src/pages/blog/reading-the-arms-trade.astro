@@ -1,0 +1,138 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const meta = {
+  title: 'Reading the Arms Trade',
+  date: '2026-06-07',
+  description: 'I expected arms spikes to track conflicts. They don\'t. Here\'s what the data actually shows — and one country where it almost does.',
+};
+---
+
+<Base title={`${meta.title} — Vincent Genov`} description={meta.description}>
+  <div class="page">
+
+    <div class="back"><a href="/blog">← Blog</a></div>
+
+    <div class="post-header">
+      <span class="post-date">{meta.date}</span>
+      <h1>{meta.title}</h1>
+      <p class="post-desc">{meta.description}</p>
+    </div>
+
+    <div class="prose">
+
+      <h2>The hypothesis that didn't hold</h2>
+      <p>
+        When I built the anomaly detection layer for the arms tracker, the assumption felt obvious:
+        countries import more weapons when they're fighting, or when their neighbors are. A spike
+        in a country's Import Volume — should track conflict. That's the story arms deals
+        seem to tell.
+      </p>
+      <p>
+        So I cross-referenced 497 flagged HHI anomalies against UCDP conflict data, using a
+        geographic and temporal window: does the spiking country, or a near neighbor, have a
+        recorded conflict within a few years of the spike?
+      </p>
+      <p>
+        The answer: 28% of spikes had a nearby conflict. The baseline rate — the share of
+        country-years in the dataset that had nearby conflicts, regardless of whether there was
+        a spike — was 27%. The anomalies predicted conflict exactly as well as chance.
+      </p>
+
+      <h2>What the null result means</h2>
+      <p>
+        A null result isn't a failure of the pipeline. The anomaly detection is working; 
+        the UCDP join is sound. The null result is a finding:
+        arms trade structure is not primarily driven by active conflict. Something else is.
+      </p>
+      <p>
+        Looking at specific spikes, a pattern emerges. The anomalies that <em>do</em> align with
+        conflict are mostly leading indicators — the spike comes before the war, not during it.
+        Arms flows are anticipatory. Countries (or their suppliers) seem to know something is coming.
+      </p>
+
+      <h2>Cuba, 1960</h2>
+
+      <img src="/arms-spike.png" alt="Cuba HHI chart 1955–2004" class="inline-img" />
+
+      <p>
+        <em>
+          [SCREENSHOT: We can see a massive spike in Cuba's import volume in 1960.]
+        </em>
+        <br>
+        <em>
+          [HISTORICAL CONTEXT: "The 1960 surge reflects Cuba's rapid militarization 
+          following the 1959 Revolution. As tensions with the U.S. escalated due to 
+          nationalization, Cuba pivoted toward the Soviet Union for military aid, 
+          preparing for potential confrontation and the 1961 Bay of Pigs invasion."]
+        </em>
+      </p>
+      <p>
+        Cuba is one of the 28% — a spike that does align with conflict. But the timing is what 
+        makes it interesting. The spike comes in 1960; the Bay of Pigs invasion doesn't 
+        happen until 1961. The weapons arrived before the war, not during it.
+      </p>
+      <p>
+        The chart reflects this. There's a steady baseline, then a sharp structural jump in 
+        1960 — not the kind of gradual noise you'd expect from an ongoing conflict, but a single 
+        deliberate inflection point. The Gemini context fills in why: after the 1959 Revolution, 
+        Cuba pivoted toward the Soviet Union as U.S. tensions escalated, arming up in 
+        anticipation of confrontation.
+      </p>
+      <p>
+        This is what a leading indicator looks like in the data. The arms spike didn't react to 
+        the conflict — it preceded it.
+      </p>
+    </div>
+
+  </div>
+</Base>
+
+<style>
+  .back {
+    margin-bottom: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .back a {
+    color: var(--muted);
+    border-bottom: none;
+    transition: color 0.15s;
+  }
+
+  .back a:hover {
+    color: var(--text);
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+  }
+
+  .post-date {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .post-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.65;
+    font-style: italic;
+  }
+
+  .inline-img {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    margin: 1.5rem 0;
+  }
+</style>

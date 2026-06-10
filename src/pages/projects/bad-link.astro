@@ -1,0 +1,145 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base
+  title="Bad Link — Vincent Genov"
+  description="Two-player co-op puzzle game built from scratch in 48 hours for Mini Jam 111."
+>
+  <div class="page">
+
+    <div class="back"><a href="/projects">← Projects</a></div>
+
+    <div class="header">
+      <div class="tags">
+        <span class="tag">C++</span>
+        <span class="tag">SFML</span>
+        <span class="tag">Game Jam</span>
+        <span class="tag">48 Hours</span>
+      </div>
+      <h1>Bad Link</h1>
+      <p class="subtitle">Two-player co-op puzzle game. No engine. 48 hours. Mini Jam 111.</p>
+    </div>
+
+    <img src="/bad-link.gif" alt="Bad Link gameplay" class="hero-img" />
+
+    <div class="prose">
+
+      <h2>The Situation</h2>
+      <p>
+        Mini Jam 111's theme was Colors, with the limitation "You are your own enemy." I wanted 
+        to build a game where players constantly affect each other's ability to progress. So, I 
+        designed a mechanic that made cooperation essential while also turning your partner into a 
+        constraint. That idea became the foundation of Bad Link: two players connected by a tether, 
+        where every movement creates opportunities and obstacles for both players.
+      </p>
+
+      <h2>What I built</h2>
+      <p>
+        Bad Link is a two-player co-op puzzle game where each player controls a character linked
+        by a tether. The tether is both a tool and a constraint — players use the tension between
+        them to navigate obstacles and solve color-gated puzzles where each player can only 
+        interact with certain elements.
+      </p>
+      <p>
+        Everything is written in C++ with SFML handling windowing, rendering, and input. No
+        game engine: physics, collision detection, entity management, and the tether simulation
+        are all implemented from scratch.
+      </p>
+
+      <h2>The hard part</h2>
+      <p>
+        The hardest part wasn't the puzzles themselves — it was making the core mechanic 
+        reliable. With only a weekend to build the game, I focused on creating a simple tether 
+        system that was predictable and easy to design around. Once the mechanic felt stable, 
+        level design became much faster.
+      </p>
+      <p>
+        The second challenge was time. Building a complete game in a weekend meant constantly 
+        making tradeoffs between new features and polish. Several ideas, including a level 
+        editor and additional puzzle mechanics, were cut so I could focus on making the 
+        core gameplay feel complete and reliable.
+      </p>
+
+      <h2>What I'd do next</h2>
+      <p>
+        The level editor was cut for time — levels are hardcoded. A proper editor would make
+        level design iterable and open the game to community levels. The color mechanic also
+        has more depth than the jam version explores: right now each player has a fixed color
+        affinity, but a system where players can swap affinities by colliding would create
+        more interesting puzzle space.
+      </p>
+
+    </div>
+
+    <div class="project-links">
+      <a href="https://vincennnt1.itch.io/bad-link" target="_blank" rel="noopener">Play on Itch.io →</a>
+      <a href="https://github.com/vincennnt1" target="_blank" rel="noopener">GitHub</a>
+    </div>
+
+  </div>
+</Base>
+
+<style>
+  .back {
+    margin-bottom: 2.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .back a {
+    color: var(--muted);
+    border-bottom: none;
+    transition: color 0.15s;
+  }
+
+  .back a:hover {
+    color: var(--text);
+  }
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .header .tags {
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 0.5rem;
+  }
+
+  .hero-img {
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .project-links {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+  }
+
+  .project-links a {
+    color: var(--accent);
+    border-bottom: none;
+    transition: color 0.15s;
+  }
+
+  .project-links a:hover {
+    color: var(--text);
+  }
+</style>

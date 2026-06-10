@@ -1,0 +1,88 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const posts = [
+  {
+    slug: 'reading-the-arms-trade',
+    title: 'Reading the Arms Trade',
+    date: '2026-06-07',
+    description: 'I expected arms spikes to track conflicts. They don\'t. Here\'s what the data actually shows — and one country where it almost does.',
+  },
+];
+---
+
+<Base title="Blog — Vincent Genov" description="Writing about data findings, mostly from the global arms trade project.">
+  <div class="page">
+
+    <h2 class="page-label">Blog</h2>
+
+    <ul class="post-list">
+      {posts.map(post => (
+        <li class="post-item">
+          <span class="post-date">{post.date}</span>
+          <div class="post-body">
+            <a class="post-title" href={`/blog/${post.slug}`}>{post.title}</a>
+            <p class="post-desc">{post.description}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</Base>
+
+<style>
+  .page-label {
+    margin-bottom: 3rem;
+  }
+
+  .post-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .post-item {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .post-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding-top: 0.25rem;
+    letter-spacing: 0.03em;
+  }
+
+  .post-title {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 1.25rem;
+    color: var(--text);
+    border-bottom: none;
+    margin-bottom: 0.4rem;
+    transition: color 0.15s;
+  }
+
+  .post-title:hover {
+    color: var(--accent);
+  }
+
+  .post-desc {
+    font-size: 0.925rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 480px) {
+    .post-item {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+  }
+</style>

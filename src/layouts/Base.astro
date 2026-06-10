@@ -1,0 +1,46 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Vincent Genov — Data Science student at the University of Waterloo." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="/">Vincent Genov</a>
+  <ul class="nav-links">
+    <li><a href="/projects">Projects</a></li>
+    <li><a href="/blog">Blog</a></li>
+    <li><a href="/RESUME_VINCENT_GENOV.pdf" target="_blank" rel="noopener">Resume</a></li>
+  </ul>
+</nav>
+
+<main>
+  <slot />
+</main>
+
+<footer>
+  <span class="footer-copy">© 2026 Vincent Genov</span>
+  <ul class="footer-links">
+    <li><a href="https://github.com/vincennnt1" target="_blank" rel="noopener">GitHub</a></li>
+    <li><a href="https://linkedin.com/in/vincent-genov/" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="mailto:vgenov@uwaterloo.ca">Email</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
